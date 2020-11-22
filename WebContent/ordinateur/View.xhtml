@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOrdinateurTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOrdinateurLabel_code}"/>
+                    <h:outputText value="#{ordinateurController.selected.code}" title="#{bundle.ViewOrdinateurTitle_code}"/>
+                    <h:outputText value="#{bundle.ViewOrdinateurLabel_nom}"/>
+                    <h:outputText value="#{ordinateurController.selected.nom}" title="#{bundle.ViewOrdinateurTitle_nom}"/>
+                    <h:outputText value="#{bundle.ViewOrdinateurLabel_adresseIP}"/>
+                    <h:outputText value="#{ordinateurController.selected.adresseIP}" title="#{bundle.ViewOrdinateurTitle_adresseIP}"/>
+                    <h:outputText value="#{bundle.ViewOrdinateurLabel_salle}"/>
+                    <h:outputText value="#{ordinateurController.selected.salle}" title="#{bundle.ViewOrdinateurTitle_salle}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ordinateurController.destroyAndView}" value="#{bundle.ViewOrdinateurDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOrdinateurEditLink}"/>
+                <br />
+                <h:commandLink action="#{ordinateurController.prepareCreate}" value="#{bundle.ViewOrdinateurCreateLink}" />
+                <br />
+                <h:commandLink action="#{ordinateurController.prepareList}" value="#{bundle.ViewOrdinateurShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOrdinateurIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

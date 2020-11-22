@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListInstallationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListInstallationEmpty}" rendered="#{installationController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{installationController.items.rowCount > 0}">
+                    <h:outputText value="#{installationController.pagination.pageFirstItem + 1}..#{installationController.pagination.pageLastItem + 1}/#{installationController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{installationController.previous}" value="#{bundle.Previous} #{installationController.pagination.pageSize}" rendered="#{installationController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{installationController.next}" value="#{bundle.Next} #{installationController.pagination.pageSize}" rendered="#{installationController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{installationController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInstallationTitle_code}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.code}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInstallationTitle_dateInstall}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateInstall}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInstallationTitle_version}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.version}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInstallationTitle_logiciel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.logiciel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{installationController.prepareView}" value="#{bundle.ListInstallationViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{installationController.prepareEdit}" value="#{bundle.ListInstallationEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{installationController.destroy}" value="#{bundle.ListInstallationDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{installationController.prepareCreate}" value="#{bundle.ListInstallationCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListInstallationIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
